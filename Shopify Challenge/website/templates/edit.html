@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% block title %}Edit{% endblock %} 
+
+{% block content %} 
+<form method="POST">
+   <h3 align="center">Edit an Existing Inventory Item</h3>
+   <div class="form-group">
+     <label for="name">Item Name</label>
+     <input
+       type="text"
+       class="form-control"
+       id="name"
+       name="name"
+       value=" {{item.name}} "
+       placeholder="Enter Item Name"
+     />
+   </div>
+   <div class="form-group">
+     <label for="count">Item Count</label>
+     <input
+       type="number"
+       class="form-control"
+       id="count"
+       name="count"
+       value = "{{item.count}}"
+       placeholder="Enter Item Count"
+     />
+   </div>
+   <div class="form-group">
+     <label for="price">Unit Price</label>
+     <input
+       type="number"
+       class="form-control"
+       id="price"
+       name="price"
+       min="0"
+       step="any"
+       value="{{item.price}}"
+       placeholder="Enter Unit Price"
+     />
+   </div>
+   <br />
+   <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}

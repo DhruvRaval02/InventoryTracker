@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Inventory{% endblock %}
+
+{% block content %}
+<h2 align="center">View All Products</h2> 
+<table id="productTable" class="table table-bordered table-condensed table-striped">
+   <thead>
+       <tr>
+           <th>Edit</th>
+           <th>Product Name</th>
+           <th>Quantity</th>
+           <th>Unit Price</th>
+           <th>Total Price</th>
+           <th>Delete</th>
+       </tr>
+       {% for item in all_items %}
+       <tr>
+         <th> <button type="button" class="btn btn-primary" onClick="editItem( {{ item.id }} )">
+          </button> </th>
+          <th> {{ item.name }} </th>
+          <th> {{ item.count }} </th>
+          <th> {{ "{:.2f}".format(item.price) }} </th>
+          <th> {{ "{:.2f}".format(item.price * item.count) }} </th>
+          <th> <button type="button" class="close" onClick="deleteItem( {{ item.id }} )">
+            <span aria-hidden="true">&times;</span>
+          </button> </th>
+       </tr>
+       {% endfor %}
+   </thead>
+</table>
+
+<h5 align="left">
+   <p>
+      <a href="{{ url_for('.download_csv') }}">Generate CSV Report</a>
+   </p>
+</h5> 
+
+<form method="POST">
+   <h2 align="center">Create a New Inventory Item</h2>
+   <div class="form-group">
+     <label for="name">Item Name</label>
+     <input
+       type="text"
+       class="form-control"
+       id="name"
+       name="name"
+       placeholder="Enter Item Name"
+     />
+   </div>
+   <div class="form-group">
+     <label for="count">Item Count</label>
+     <input
+       type="number"
+       class="form-control"
+       id="count"
+       name="count"
+       placeholder="Enter Item Count"
+     />
+   </div>
+   <div class="form-group">
+     <label for="price">Unit Price</label>
+     <input
+       type="number"
+       class="form-control"
+       id="price"
+       name="price"
+       min="0"
+       step="any"
+       placeholder="Enter Unit Price"
+     />
+   </div>
+   <br />
+   <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
